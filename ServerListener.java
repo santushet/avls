@@ -20,7 +20,7 @@ public class ServerListener {
             @Override
             public void run() {
                 try {
-                    ServerSocket serverSocket = new ServerSocket(8000);
+                    ServerSocket serverSocket = new ServerSocket(1339);
                     System.out.println("Waiting for clients to connect...");
                     while (true) {
                         Socket clientSocket = serverSocket.accept();
