@@ -1,3 +1,5 @@
+package demo;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -61,7 +63,6 @@ public class ServerListener {
             	    clientData.append(redDataText);
             	}
             	System.out.println("Data From Client :" + clientData.toString());
-                System.out.println("Data From Client :" + clientData);
 
             /* Send Data To Client */
 
