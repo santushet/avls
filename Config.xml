@@ -16,9 +16,9 @@
         <DB_IP>trackdb.cf53zztlzwqg.us-east-1.rds.amazonaws.com:3360</DB_IP>
         <DB_NAME>trackdb</DB_NAME>
         <DB_USER>trackuser</DB_USER>
-        <DB_PWD>trackpass</DB_PWD><!-- DB Connection End-->
-        <DATA_IP>125.63.126.189</DATA_IP><!-- Data Url Start-->
-        <DATA_PORT>5050,3000</DATA_PORT>
+        <DB_PWD>trackmaster</DB_PWD><!-- DB Connection End-->
+        <DATA_IP>localhost</DATA_IP><!-- Data Url Start-->
+        <DATA_PORT>1339</DATA_PORT>
         <TIMEZONE>+05:30</TIMEZONE>
         <MIN_CONNECTION>5</MIN_CONNECTION>
         <MAX_CONNECTION>50</MAX_CONNECTION>
