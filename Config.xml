@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : Config.xml
+    Created on : September 20, 2013, 9:51 AM
+    Author     : sai
+    Description:
+        Purpose of the document follows.
+-->
+
+<ROOT>
+    <SETTING>
+		<DRIVER>com.microsoft.sqlserver.jdbc.SQLServerDriver</DRIVER> --><!-- DB Connection Start-->
+<!--        <DRIVER>org.postgresql.Driver</DRIVER>-->
+        <URL>jdbc:sqlserver://</URL>
+        <DB_IP>180.179.48.107</DB_IP>
+        <DB_NAME>orixnew</DB_NAME>
+        <DB_USER>sa</DB_USER>
+        <DB_PWD>track@123</DB_PWD><!-- DB Connection End-->
+        <DATA_IP>125.63.126.189</DATA_IP><!-- Data Url Start-->
+        <DATA_PORT>5050,3000</DATA_PORT>
+        <TIMEZONE>+05:30</TIMEZONE>
+        <MIN_CONNECTION>5</MIN_CONNECTION>
+        <MAX_CONNECTION>50</MAX_CONNECTION>
+
+        <COMPANY_NAME>Trinity</COMPANY_NAME>
+        <BUILD_DATE>20/09/2010</BUILD_DATE>
+        <VERSIONNO>1.0</VERSIONNO>
+        <ENABLE_DISPATCH>true</ENABLE_DISPATCH>
+    </SETTING>
+</ROOT>
