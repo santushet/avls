@@ -5,7 +5,7 @@
     <title>MapBox Example</title>
     <meta name="description" content="">
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-  
+
     <script src="https://cdn.pubnub.com/pubnub-3.7.13.min.js"></script>
     <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js'></script>
     <link rel="stylesheet" href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
@@ -24,36 +24,42 @@
     <div class="container"><h1>CITIZENGAGE LIVE TRACKER</h1></div>
     <div id="map"></div>
     <br>
-    <div class="container"><a href="/">Broadcast Page (Home)</a></div>
   <script>
     var lat = null;
     var lng = null;
 
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        var locationMarker = null;
-        if (locationMarker){
-          // return if there is a locationMarker bug
-          return;
-        }
+    lat='12.96157';
+    lng='77.58337';
 
-        // sets default position to your position
-        lat = position.coords["latitude"];
-        lng = position.coords["longitude"];
+    // calls PubNub
+    pubs();
+    // calls main method
+    main();
 
-        // calls PubNub
-        pubs();
-        // calls main method
-        main();
-      },
-      function(error) {
-        console.log("Error: ", error);
-      },
-      {
-        enableHighAccuracy: true
-      }
-      );
-    }
+
+    // if (navigator.geolocation) {
+    //   navigator.geolocation.getCurrentPosition(function(position) {
+    //     var locationMarker = null;
+    //     if (locationMarker){
+    //       // return if there is a locationMarker bug
+    //       return;
+    //     }
+    //
+    //     // sets default position to your position
+    //     lat = position.coords["latitude"];
+    //     lng = position.coords["longitude"];
+    //
+    //
+    //
+    //   },
+    //   function(error) {
+    //     console.log("Error: ", error);
+    //   },
+    //   {
+    //     enableHighAccuracy: true
+    //   }
+    //   );
+    // }
 
     function pubs() {
       pubnub = PUBNUB.init({
@@ -105,7 +111,7 @@ pubnub.subscribe({
       marker1 = L.marker([lat, lng], {
         icon: L.mapbox.marker.icon({
 			title:'Tiwari Transport',
-			
+
           'marker-color': '#f86767',
 	 'marker-size': 'large',
         'marker-symbol': 'bus'
