@@ -1,0 +1,131 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>MapBox Example</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  
+    <script src="https://cdn.pubnub.com/pubnub-3.7.13.min.js"></script>
+    <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js'></script>
+    <link rel="stylesheet" href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
+    <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.css' rel='stylesheet' />
+
+    <style>
+      html, body, #map {
+        height: 700px;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
+
+  </head>
+  <body>
+    <div class="container"><h1>CITIZENGAGE LIVE TRACKER</h1></div>
+    <div id="map"></div>
+    <br>
+    <div class="container"><a href="/">Broadcast Page (Home)</a></div>
+  <script>
+    var lat = null;
+    var lng = null;
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var locationMarker = null;
+        if (locationMarker){
+          // return if there is a locationMarker bug
+          return;
+        }
+
+        // sets default position to your position
+        lat = position.coords["latitude"];
+        lng = position.coords["longitude"];
+
+        // calls PubNub
+        pubs();
+        // calls main method
+        main();
+      },
+      function(error) {
+        console.log("Error: ", error);
+      },
+      {
+        enableHighAccuracy: true
+      }
+      );
+    }
+
+    function pubs() {
+      pubnub = PUBNUB.init({
+       subscribe_key:'sub-c-be626cbc-18f1-11e6-8b91-02ee2ddab7fe',
+       publish_key:'pub-c-a64317a5-a592-4a93-86a5-470684e385f0'
+//        subscribe_key: 'demo', // always required
+  //      publish_key: 'demo'
+      })
+      pubnub.subscribe({
+        channel: "updates",
+        message: function(message, channel) {
+          console.log(message)
+          lat = message.new_val.lat;
+          lng = message.new_val.lng;
+          map.setView([lat, lng]);
+//          map_line.addLatLng([lat,lng]);
+          marker1.setLatLng(L.latLng(lat, lng));
+        },
+        connect: function() {console.log("pubnub connected")}
+      })
+
+pubnub.subscribe({
+        channel: "updates1",
+        message: function(message, channel) {
+          console.log(message)
+          lat = message.new_val.lat;
+          lng = message.new_val.lng;
+          map.setView([lat, lng]);
+//          map_line.addLatLng([lat,lng]);
+          marker2.setLatLng(L.latLng(lat, lng));
+        },
+        connect: function() {console.log("pubnub connected")}
+      })
+    }
+
+    //allow pubs to see map_line polyline
+    var map_line;
+    var map;
+    var marker1;
+    var marker2;
+
+    function main() {
+      // Provide your access token
+      L.mapbox.accessToken = 'pk.eyJ1Ijoic2FudHVzaGV0IiwiYSI6ImNpbzl0eGt4ZTAzNWF2NGtxaXBseXI5eXAifQ.mjBZYgtZGRXfSyRqqqAnZQ';
+      // Create a map in the div #map
+      map = L.mapbox.map('map', 'mapbox.streets');
+      map.setView([lat, lng], 17);
+
+      marker1 = L.marker([lat, lng], {
+        icon: L.mapbox.marker.icon({
+			title:'Tiwari Transport',
+			
+          'marker-color': '#f86767',
+	 'marker-size': 'large',
+        'marker-symbol': 'bus'
+        })
+      });
+
+      marker2 = L.marker([lat, lng], {
+        icon: L.mapbox.marker.icon({
+			title:' Chandru',
+          'marker-size': 'large',
+        'marker-symbol': 'bus',
+        'marker-color': '#fa0'
+        })
+      });
+
+    //  map_line = L.polyline([], {color: 'blue'}).addTo(map);
+
+      marker1.addTo(map);
+      marker2.addTo(map);
+    }
+  </script>
+  </body>
+</html>
