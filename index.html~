@@ -80,7 +80,7 @@
         connect: function() {console.log("pubnub connected")}
       })
 
-	pubnub.subscribe({
+pubnub.subscribe({
         channel: "updates1",
         message: function(message, channel) {
           console.log(message)
