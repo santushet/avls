@@ -23,19 +23,17 @@
   <body>
     <div class="container"><h1>CITIZENGAGE LIVE TRACKER</h1></div>
     <div id="map"></div>
-    <br>
   <script>
     var lat = null;
     var lng = null;
 
-    lat='12.96157';
-    lng='77.58337';
+    // lat='12.96157';
+    // lng='77.58337';
 
     // calls PubNub
     pubs();
     // calls main method
     main();
-
 
     // if (navigator.geolocation) {
     //   navigator.geolocation.getCurrentPosition(function(position) {
@@ -68,6 +66,34 @@
 //        subscribe_key: 'demo', // always required
   //      publish_key: 'demo'
       })
+
+
+      pubnub.history({
+          channel : 'updates',
+          callback : function(m){
+              lat=m.new_val.lat;
+              lng=m.new_val.lng;
+              map.setView([lat, lng]);
+    //          map_line.addLatLng([lat,lng]);
+              marker1.setLatLng(L.latLng(lat, lng));
+          },
+          count : 1,
+          reverse : false
+      });
+
+      pubnub.history({
+          channel : 'updates1',
+          callback : function(m){
+              lat=m.new_val.lat;
+              lng=m.new_val.lng;
+              map.setView([lat, lng]);
+    //          map_line.addLatLng([lat,lng]);
+              marker2.setLatLng(L.latLng(lat, lng));
+          },
+          count : 1,
+          reverse : false
+      });
+
       pubnub.subscribe({
         channel: "updates",
         message: function(message, channel) {
@@ -110,8 +136,6 @@ pubnub.subscribe({
 
       marker1 = L.marker([lat, lng], {
         icon: L.mapbox.marker.icon({
-			title:'Tiwari Transport',
-
           'marker-color': '#f86767',
 	 'marker-size': 'large',
         'marker-symbol': 'bus'
