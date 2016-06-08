@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="lib" path="/home/santosh/.m2/repository/com/rethinkdb/rethinkdb-driver/2.3.0/rethinkdb-driver-2.3.0.jar" sourcepath="/home/santosh/.m2/repository/com/rethinkdb/rethinkdb-driver/2.3.0/rethinkdb-driver-2.3.0-sources.jar"/>
+	<classpathentry kind="lib" path="/home/santosh/.m2/repository/org/slf4j/slf4j-api/1.7.12/slf4j-api-1.7.12.jar"/>
+	<classpathentry kind="lib" path="/home/santosh/.m2/repository/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="/home/santosh/.m2/repository/junit/junit/4.10/junit-4.10.jar"/>
+	<classpathentry kind="lib" path="/home/santosh/.m2/repository/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar"/>
+	<classpathentry kind="lib" path="/home/santosh/Downloads/mysql-connector-java-3.1.14/mysql-connector-java-3.1.14-bin.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
