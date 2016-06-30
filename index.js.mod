@@ -11,8 +11,28 @@ r.connect( {host: 'ec2-54-173-220-171.compute-1.amazonaws.com', port: 28015}, fu
     if (err) throw err;
     connection = conn;
 
+      r.table('packet').run(connection,function(err,cursor)){
+      cursor.each(function(err,result){
+        if(err) throw err;
+            pubnub.publish({
+              channel:"updates",
+              message:result,
+              callback: function(m){console.log(m)}
+            });
+      });
+    };
+    r.table('packet').run(connection,function(err,cursor)){
+      cursor.each(function(err,result){
+        if(err) throw err;
+            pubnub.publish({
+              channel:"updates1",
+              message:result,
+              callback: function(m){console.log(m)}
+            });
+      });
+    };
 
-    r.table('packet').filter(r.row('unitNo').eq("355217044865989"))
+    r.table('packet').filter(r.row('unitNo').eq("355217044865989")) 
       .changes() // Look for any changes happening to this record and keeps returning it
       .run(connection, function(err, cursor) { // run the above query on this connection
         if (err) throw err;
@@ -27,9 +47,9 @@ r.connect( {host: 'ec2-54-173-220-171.compute-1.amazonaws.com', port: 28015}, fu
             });
         });
     });
-
-
-    r.table('packet').filter(r.row('unitNo').eq("353218071614755"))
+    
+    
+    r.table('packet').filter(r.row('unitNo').eq("353218071614755")) 
       .changes() // Look for any changes happening to this record and keeps returning it
       .run(connection, function(err, cursor) { // run the above query on this connection
         if (err) throw err;
@@ -45,3 +65,5 @@ r.connect( {host: 'ec2-54-173-220-171.compute-1.amazonaws.com', port: 28015}, fu
         });
     });
 })
+
+
