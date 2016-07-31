@@ -12,15 +12,16 @@ r.connect( {host: 'ec2-54-173-220-171.compute-1.amazonaws.com', port: 28015}, fu
     connection = conn;
 
 
-    r.table('packet').filter(r.row('unitNo').eq("355217044865989"))
+    // r.table('packet').filter(r.row('unitNo').eq("355217044865989"))
+      r.table('packet').filter(r.row('unitNo').eq("355217044865989"))
       .changes() // Look for any changes happening to this record and keeps returning it
       .run(connection, function(err, cursor) { // run the above query on this connection
         if (err) throw err;
         cursor.each(function(err, result) { // If there is no error, it returns a cursor, which is collection of JSON objects
             if (err) throw err;
-
+            console.log(result);
             pubnub.publish({  //publishing the updated data through PubNub, in 'updates' channel
-              channel: "updates",
+              channel: "channel-1",
               message: result, //this is the message payload we are sending
               // result contains a new value and the old value of this record. This is due to .changes() method.
               callback: function(m){console.log(m)}
@@ -35,9 +36,25 @@ r.connect( {host: 'ec2-54-173-220-171.compute-1.amazonaws.com', port: 28015}, fu
         if (err) throw err;
         cursor.each(function(err, result) { // If there is no error, it returns a cursor, which is collection of JSON objects
             if (err) throw err;
+console.log(result);
+            pubnub.publish({  //publishing the updated data through PubNub, in 'updates' channel
+              channel: "channel-2",
+              message: result, //this is the message payload we are sending
+              // result contains a new value and the old value of this record. This is due to .changes() method.
+              callback: function(m){console.log(m)}
+            });
+        });
+    });
+
+    r.table('packet').filter(r.row('unitNo').eq("355217044868611"))
+      .changes() // Look for any changes happening to this record and keeps returning it
+      .run(connection, function(err, cursor) { // run the above query on this connection
+        if (err) throw err;
+        cursor.each(function(err, result) { // If there is no error, it returns a cursor, which is collection of JSON objects
+            if (err) throw err;
 
             pubnub.publish({  //publishing the updated data through PubNub, in 'updates' channel
-              channel: "updates1",
+              channel: "channel-3",
               message: result, //this is the message payload we are sending
               // result contains a new value and the old value of this record. This is due to .changes() method.
               callback: function(m){console.log(m)}
